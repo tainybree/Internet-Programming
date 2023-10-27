@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        .product {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            width: 30%;
+        }
+
+        h2 {
+            color: #007BFF;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #cart {
+            width: 30%;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        #cart h2 {
+            color: #007BFF;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        button#checkout {
+            display: block;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button#checkout:hover {
+            background-color: #0056b3;
+        }
+
+        #feedback-form {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 30%;
+            margin: 10px;
+        }
+
+        #feedback-form h2 {
+            color: #007BFF;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        button#submit-feedback {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button#submit-feedback:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Fantasy Product Store</h1>
+        <p> shop for amazing products!</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="C:\Users\britney bree\Desktop\web.2.html">Product Description Page</a></li>
+        </ul>
+    </nav>
+    <section id="products">
+        <h2>Featured Products</h2>
+        <div class="product">
+            <img src="c:\Users\britney bree\Pictures\Camera Roll\hallow 1.jpeg" alt="Product 1" height="220" width="223">
+            <h3>Hallo Mask</h3>
+            <p>$20.00</p>
+            <button onclick="addToCart('Hallow Mask', 20.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="c:\Users\britney bree\Pictures\Camera Roll\hallow 2.jpeg" alt="Product 2" height="223" width="226">
+            <h3>Cute Marshmallow</h3>
+            <p>$30.00</p>
+            <button onclick="addToCart('Cute Marshmallow', 30.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="c:\Users\britney bree\Pictures\Camera Roll\hallow 3.jpeg" alt="Product 3" height="223" width="226">
+            <h3>Candy Marshmallow</h3>
+            <p>$40.00</p>
+            <button onclick="addToCart('Candy Marshmallow', 40.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="c:\Users\britney bree\Pictures\Camera Roll\Screenshot 2023-10-27 161629.png" alt="Product 4" height="223" width="226">
+            <h3>Biscuit Ice Cream</h3>
+            <p>$50.00</p>
+            <button onclick="addToCart('Biscuit Ice Cream', 50.00)">Add to Cart</button>
+        </div>
+    </section>
+    <div id="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart-items">
+            <!-- Cart items will be added here dynamically using JavaScript -->
+        </ul>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button id="checkout" onclick="checkout()">Checkout</button>
+    </div>
+    <section id="feedback-form">
+        <h2>Give Feedback</h2>
+        <form id="feedback-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Feedback:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button id="submit-feedback" type="submit">Submit Feedback</button>
+        </form>
+    </section>
+
+    <script>
+        // Sample product data
+        const cart = [];
+        const products = [
+            { name: 'Product 1', price: 20.00 },
+            { name: 'Product 2', price: 30.00 }
+        ];
+
+        // Add product to cart
+        function addToCart(productName, price) {
+            const item = { name: productName, price: price };
+            cart.push(item);
+            updateCartDisplay();
+        }
+
+        // Update the cart display
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.innerText = `${item.name} - $${item.price.toFixed(2)}`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+
+            cartTotal.innerText = total.toFixed(2);
+        }
+
+        // Checkout functionality
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Add products before checking out.');
+            } else {
+                alert('Thank you for your order!');
+                cart.length = 0;
+                updateCartDisplay();
+            }
+        }
+
+        // Handle feedback form submission
+        const feedbackForm = document.getElementById('feedback-form');
+        feedbackForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            alert('Thank you for your feedback!');
+            feedbackForm.length = 0 ();
+        });
+    </script>
+</body>
+</html>
